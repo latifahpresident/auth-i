@@ -8,9 +8,14 @@ const router = express.Router();
 
 router.get('/', async(req, res) => {
     try{
-        const data = await db('users')
-        res.status(200).json(data)
-    }catch(err){
+        const data = await db('users').select('id', 'username', 'password')
+        if(data) {
+            res.status(200).json(data)
+        } else {
+
+        }
+        
+    } catch(err){
         res.status(500).json(`{error: 'Invalid route'}`)
     }
 });
